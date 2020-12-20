@@ -60,7 +60,7 @@ User.create!(
   )
 end
 
-1000.times do |n|
+14000.times do |n|
   user_id = [2, 3, 4, 5]
   patient_id = [*1..100]
   day = Faker::Date.between(from: 12.month.ago, to: 12.month.from_now)

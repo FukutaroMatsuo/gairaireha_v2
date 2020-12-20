@@ -30,8 +30,8 @@ module Rehabilitation
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.generators do |g|
-      g.assets false          # CSS, JavaScriptファイルは生成しない
-      g.test_framework false  # testファイルは生成しない
+      g.assets false
+      g.test_framework false
       g.test_framework :rspec,
         controller_specs: false,
         view_specs: false,

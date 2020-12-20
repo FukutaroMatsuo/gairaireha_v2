@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Revenue, type: :model do
+RSpec.describe Reha, type: :model do
   before do 
-    @revenue = FactoryBot.build(:revenue)
+    @reha = FactoryBot.build(:reha)
   end
 
   describe "バリデーションのテスト" do
     it "入力必須項目は機能しているか" do
-      expect(@revenue).to be_valid
+      expect(@reha).to be_valid
     end
   end
 end

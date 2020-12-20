@@ -4,15 +4,15 @@ class Patient < ApplicationRecord
   has_many :rehas, dependent: :destroy
   has_many :reha_users, through: :rehas, source: :user
   
-  validates :patient_name, presence: true  
-  validates :kana, presence: true  
-  validates :birthday, length: { in: 0..10 }
-  validates :area, length: { in: 0..20 }
-  validates :start_day, length: { in: 0..10 }
-  validates :deasease, presence: true, length: { in: 1..10 }
-  validates :goal, length: { in: 0..30 }
-  validates :achievement, length: { in: 0..10 }
-  validates :drop_out, length: { in: 0..20 }
+  validates :patient_name,  presence: true, length: { maximum: 7 }  
+  validates :kana,          presence: true, length: { maximum: 15 }  
+  validates :birthday,      presence: true, length: { maximum: 10 }
+  validates :area,          presence: true, length: { maximum: 10 }
+  validates :start_day,     presence: true, length: { maximum: 10 }
+  validates :deasease,      presence: true, length: { maximum: 3 }
+  validates :goal,                          length: { maximum: 30 }
+  validates :achievement,                   length: { maximum: 3 }
+  validates :drop_out,                      length: { maximum: 20 }
 
   
   # 今年度の目標達成率

@@ -35,6 +35,7 @@ class RehasController < ApplicationController
     # 単位数chart
     @reha_this_year = Reha.unit_this_year
     # 総収益chart
+    @revenues_data_last_year = Revenue.last_year.revenue_array
     @revenues_data_this_year = Revenue.this_year.revenue_array
     # 稼働率chart
     @operation = Reha.operation

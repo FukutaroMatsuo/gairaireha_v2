@@ -29,7 +29,8 @@ gem 'faker'
 gem 'gimei'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 4.0.0.beta2'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rails-controller-testing'
   gem 'rubocop-airbnb'
