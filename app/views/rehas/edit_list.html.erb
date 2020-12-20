@@ -1,0 +1,40 @@
+<p><%= Date.today %>の日報</p>
+
+<%= form_with model: @reha, url: edit_list_path, local: true do |form| %>
+  <% @reha.each do |reha|%>
+    <%= fields_for 'rehas[]', reha do |field| %>
+      <div class="row z-depth-1">
+        <div class="input-field col s12 m3">
+          <%= field.label :day, "例)2020/01/01" %>
+          <%= field.text_field :day %>
+        </div>
+        
+        <div class="input-field col s12 m2">
+          <%= field.label :deasease, "疾患別" %>
+          <%= field.text_field :deasease %>
+        </div>
+        
+        <div class="input-field col s12 m3">
+          <%= field.label :user_id, "PT名" %>
+          <%= field.text_field :user_id %>
+        </div>
+  
+        <div class="input-field col s12 m3">
+          <%= field.label :patient_id, "患者名" %>
+          <%= field.text_field :patient_id %>
+        </div>
+  
+        <div class="input-field col s12 m1">
+          <%= field.label :unit, "単位数" %>
+          <%= field.text_field :unit %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="row">
+      <div class="input-field col s12">
+        <%= form.submit "確定", class: "btn green waves-effect waves-light right" %>
+      </div>
+    </div>
+<% end %>

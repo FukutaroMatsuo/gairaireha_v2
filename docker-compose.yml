@@ -1,0 +1,34 @@
+version: "3"
+
+volumes:
+  db-data:
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - "DATABASE_PASSWORD=postgres"
+      - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+    links:
+      - db
+
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    logging:
+      driver: none
+
+  db:
+    image: postgres
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=postgres"

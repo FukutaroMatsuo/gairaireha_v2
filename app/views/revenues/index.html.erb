@@ -1,0 +1,100 @@
+<% provide(:title, '収益一覧') %>
+<div class="row">
+  <div class="col s12 m12 l12">
+
+    <div class="col s12 m12 l12">
+      <h5><i class="material-icons gray-text small">timeline</i> 今年度データ一覧</h5>
+    </div>
+
+    <%= link_to "データ出力", revenues_path(format: :csv), class: "waves-effect waves-light btn" %>
+    
+    <div class="col s12 m12 l12">
+      <div class="mod-tbl">
+        <table class="revenue-table">
+          <thead class="revenue-thead">
+            <tr class="revenue-tr">
+              <th class="revenue-th"></th>
+              <th class="revenue-th">新規</th>
+              <th class="revenue-th">再利用</th>
+              <th class="revenue-th">中止</th>
+              <th class="revenue-th">運</th>
+              <th class="revenue-th">脳</th>
+              <th class="revenue-th">呼</th>
+              <th class="revenue-th">実人数</th>
+              <th class="revenue-th">1単位数</th>
+              <th class="revenue-th">2単位数</th>
+              <th class="revenue-th">総単位数</th>
+              <th class="revenue-th">総点数</th>
+              <th class="revenue-th">前年比</th>
+            </tr>
+          </thead>
+
+          <% @d1.zip(@d2, @d5, @d6, @d7, @d8, @d9, @d10, @d11, @d12, @d13) do |d| %> 
+            <tbody class="revenue-tbody">
+              <tr class="revenue-tr">
+                <th class="revenue-th y-fixed"><%= d[0] %> 月</th>
+                <td class="revenue-td"><%= d[1] %></td>
+                <td class="revenue-td"><%= d[1] %></td>
+                <td class="revenue-td"><%= d[1] %></td>
+                <td class="revenue-td"><%= d[2] %></td>
+                <td class="revenue-td"><%= d[3] %></td>
+                <td class="revenue-td"><%= d[4] %></td>
+                <td class="revenue-td"><%= d[5] %></td>
+                <td class="revenue-td"><%= d[6] %></td>
+                <td class="revenue-td"><%= d[7] %></td>
+                <td class="revenue-td"><%= d[8] %></td>
+                <td class="revenue-td"><%= d[9] %></td>
+                <td class="revenue-td"><%= d[10] %></td>
+              </tr>
+            </tbody>
+          <% end %> 
+
+        </table>
+      </div>
+    </div>
+
+    <%= render 'revenue' %>
+
+    <div class="col s12 m12 l12">
+      <div class="card">
+        <div class="card-content">
+          <table class="centered year-revenue">
+            <tr>
+              <th></th>
+              <td>4月</td>
+              <td>5月</td>
+              <td>6月</td>
+              <td>7月</td>
+              <td>8月</td>
+              <td>9月</td>
+              <td>10月</td>
+              <td>11月</td>
+              <td>12月</td>
+              <td>1月</td>
+              <td>2月</td>
+              <td>3月</td>
+            </tr>
+            <tr>
+              <th>2018年度</th>
+              <% Revenue.two_years_ago.working_month_ask.each do |revenue| %>
+                <td><%= link_to revenue.score, edit_revenue_path(revenue.id) %></td>
+              <% end %>
+            </tr>
+            <tr>
+              <th>2019年度</th>
+              <% Revenue.last_year.working_month_ask.each do |revenue| %>
+                <td><%= link_to revenue.score, edit_revenue_path(revenue.id) %></td>
+              <% end %>
+            </tr>
+            <tr>
+              <th>2020年度</th>
+              <% Revenue.this_year.working_month_ask.each do |revenue| %>
+                <td><%= link_to revenue.score, edit_revenue_path(revenue.id) %></td>
+              <% end %>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

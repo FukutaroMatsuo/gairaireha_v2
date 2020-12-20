@@ -1,0 +1,60 @@
+<%= form_with(model:@patient, local:true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+
+  <div class="row" id="patient_new">
+    <div class="col s12">
+      
+      <div class="input-field">
+        <%= f.text_field :patient_name, placeholder: "患者名を漢字で半角スペースを入れて入力して下さい 例)田中 太郎" %>
+        <%= f.label :patient_name, "患者名（漢字）", class: "active" %>
+      </div>
+
+      <div class="input-field">
+        <%= f.text_field :kana, placeholder: "患者名をひらがなで半角スペースを入れて入力して下さい 例)たなか たろう" %>
+        <%= f.label :kana, "患者名（ひらがな）", class: "active" %>
+      </div>
+
+      <div class="input-field">
+        <%= f.text_field :birthday, placeholder: "生年月日を入力してください 例)1900/01/01" %>
+        <%= f.label :birthday, "生年月日", class: "active" %>
+      </div>
+
+      <div class="input-field">
+        <%= f.select :area, [["佐世保1", "佐世保1"], ["佐世保2", "佐世保2"], ["佐世保3", "佐世保3"], ["佐世保4", "佐世保4"], ["佐世保5", "佐世保5"], ["佐世保6", "佐世保6"], ["その他", "その他"]], include_blank: "地域を選択してください" %>
+      </div>
+
+      <div class="input-field">
+        <%= f.text_field :start_day, placeholder: "リハ開始日を入力してください 例)1900/01/01" %>
+        <%= f.label :start_day, "開始日", class: "active" %>
+      </div>
+
+      <div class="input-field">
+        <%= f.select :deasease, [["運動器", "運動器"], ["脳血管", "脳血管"], ["呼吸器", "呼吸器"]], include_blank: "疾患別を選択してください" %>
+      </div>
+
+      <div class="input-field">
+        <%= f.select :user_id, [["リハ一郎", "2"], ["リハ二郎", "3"], ["リハ三郎", "4"], ["リハ四郎", "5"]], include_blank: "PT名を選択してください" %>
+      </div>
+      
+      <div class="input-field">
+        <%= f.text_field :goal, placeholder: "目標を入力してください。空でも可。" %>
+        <%= f.label :goal, "目標", class: "active" %>
+      </div>
+      
+      <div class="input-field">
+        <%= f.select :achievement, [["未達成", "未達成"], ["達成", "達成"]] %>
+      </div>
+      
+      <div class="input-field">
+        <%= f.text_field :drop_out, placeholder: "中止理由を入力してください。初めは空です。" %>
+        <%= f.label :drop_out, "中止理由", class: "active" %>
+      </div>
+      
+      <div class="input-field">
+        <%= f.submit "確定", class: "btn green waves-effect waves-light right" %>
+      </div>
+      
+    </div>
+  </div>
+
+<% end %>

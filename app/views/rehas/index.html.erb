@@ -1,0 +1,219 @@
+<div class="row">
+  <div class="col s12 m12 l12">
+        
+    <div class="col s12 m12 l12">
+      <h4><i class="material-icons gray-text small">timeline</i> リハビリテーション部門のデータ</h4>
+    </div>
+    
+    <div class="col s12 m9 l9">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <table class="centered">
+            <thead>
+              <tr>
+                <th style="width: 10%;"></th>
+                <th style="width: 18%;">実人数</th>
+                <th style="width: 18%;">延べ人数</th>
+                <th style="width: 18%;">1単位数</th>
+                <th style="width: 18%;">2単位数</th>
+                <th style="width: 18%;">総単位数</th>
+              </tr>
+            </thead>
+          </table>
+          <div class="table-body-reha">
+            <table class="centered">
+              <tbody>
+                <tr>
+                  <td style="width: 10%;">今月</td>
+                  <td style="width: 18%;"><%= @patient_count_month %>人</td>
+                  <td style="width: 18%;"><%= @total_patient_count_month %>人</td>
+                  <td style="width: 18%;"><%= @one_unit_sum_month %>単位</td>
+                  <td style="width: 18%;"><%= @multiple_unit_sum_month %>単位</td>
+                  <td style="width: 18%;"><%= @unit_sum_month %>単位</td>
+                </tr>
+                <tr>
+                  <td style="width: 10%;">前月</td>
+                  <td style="width: 18%;"><%= @patient_count_prev_month %>人</td>
+                  <td style="width: 18%;"><%= @total_patient_count_prev_month %>人</td>
+                  <td style="width: 18%;"><%= @one_unit_sum_prev_month %>単位</td>
+                  <td style="width: 18%;"><%= @multiple_unit_sum_prev_month %>単位</td>
+                  <td style="width: 18%;"><%= @unit_sum_prev_month %>単位</td>
+                </tr>
+                <tr>
+                  <td style="width: 10%;">今年度</td>
+                  <td style="width: 18%;"><%= @patient_count_year %>人</td>
+                  <td style="width: 18%;"><%= @total_patient_count_year %>人</td>
+                  <td style="width: 18%;"><%= @one_unit_sum_year %>単位</td>
+                  <td style="width: 18%;"><%= @multiple_unit_sum_year %>単位</td>
+                  <td style="width: 18%;"><%= @unit_sum_year %>単位</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m3 l3">
+      <div class="card white darken-1">
+        <div class="card-content">
+          <table class="centered">
+            <thead>
+              <tr>
+                <th>稼働日一覧</th>
+              </tr>
+            </thead>
+          </table>
+          <div class="table-body-reha">
+            <table class="centered">
+              <% @get_day.each do |day| %>
+                <tbody>
+                  <tr>
+                    <td><%= link_to day.day, list_path(day.day) %></td>
+                  </tr>
+                </tbody>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m12 l12">
+      <h5><i class="material-icons gray-text">timeline</i> 今月の日報</h5>
+    </div>
+    
+    <div class="col s12 m12 l12">
+      <div class="card white darken-1">
+        <div class="data">
+          <div class="card-title center-align"><%= Date.today.month %>月の日報データ</div>
+          <div class="card-content">
+            <%= column_chart @reha_report,  stacked: true, suffix: "単位" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col s12 m12 l12">
+      <h5><i class="material-icons gray-text">timeline</i> 今年度の月報</h5>
+    </div>
+    
+    <div class="col s12 m12 l12">
+      <div class="card white darken-1">
+        <div class="data">
+          <div class="card-title center-align">今年度の月報データ</div>
+          <div class="card-content">
+            <%= column_chart @reha_report_month, stacked: true, suffix: "単位" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col s12 m12 l12">
+      <h5><i class="material-icons gray-text">timeline</i> 実人数</h5>
+    </div>
+
+    <div class="col s12 m12 l12">
+      <div class="card white darken-1">
+        <div class="data">
+          <div class="card-content">
+            <%= line_chart [
+              { name: "2018年度", data: {'4' => 120, '5' => 118, '6' => 118, '7' => 120, '8' => 109, '9' => 116, '10' => 120, '11' => 118, '12' => 120, '1' => 121, '2' => 121, '3' => 134} },
+              { name: "2019年度", data: {'4' => 129, '5' => 125, '6' => 129, '7' => 127, '8' => 119, '9' => 123, '10' => 125, '11' => 123, '12' => 128, '1' => 120, '2' => 117, '3' => 104} },
+              { name: "2020年度", data: @reha_unit_this_year }
+            ], min: 80, max: 140, suffix: "人" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col s12 m12 l12">
+      <h5><i class="material-icons gray-text">timeline</i> 総単位数</h5>
+    </div>
+
+    <div class="col s12 m12 l12">
+      <div class="card white darken-1">
+        <div class="data">
+          <div class="card-content">
+            <%= line_chart [
+              { name: "2018年度", data: {'4' => 758, '5' => 785, '6' => 861, '7' => 783, '8' => 797, '9' => 828, '10' => 893, '11' => 838, '12' => 837, '1' => 784, '2' => 878, '3' => 654} },
+              { name: "2019年度", data: {'4' => 897, '5' => 806, '6' => 884, '7' => 950, '8' => 759, '9' => 840, '10' => 882, '11' => 880, '12' => 825, '1' => 723, '2' => 793, '3' => 748} },
+              { name: "2020年度", data: @reha_this_year }
+            ], min: 600, max: 1000, suffix: "単位" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col s12 m12 l12">
+      <h5 style="display: inline-block;"><i class="material-icons gray-text">timeline</i> 稼働率</h5><span> ※算定できる最大単位数あたり何%取得できているかの値で、月間目標は中央線の80%です</span>
+    </div>
+
+    <div class="col s12 m12 l12">
+      <div class="card white darken-1">
+        <div class="data">
+          <div class="card-content">
+            <%= line_chart [
+              { name: "2018年度", data: {'4' => 70, '5' => 70, '6' => 87, '7' => 79, '8' => 86, '9' => 91, '10' => 73, '11' => 76, '12' => 74, '1' => 78, '2' => 87, '3' => 96} },
+              { name: "2019年度", data: {'4' => 82, '5' => 79, '6' => 79, '7' => 78, '8' => 75, '9' => 81, '10' => 75, '11' => 80, '12' => 77, '1' => 77, '2' => 81, '3' => 68} },
+              { name: "2020年度", data: @operation }
+            ], suffix: "%", min: 60, max: 100 %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'revenues/revenue' %>
+    
+    <div class="col s12 m12 l12">
+      <h5><i class="material-icons gray-text">timeline</i> 疾患別</h5>
+    </div>
+
+    <div class="col s12 m12 l12">
+      <div class="card white darken-1">
+        <div class="data">
+          <div class="card-content">
+            <%= column_chart [
+              { name: "2018年度", data: {'呼吸器' => 3838, '脳血管' => 4883, '運動器' => 4569} },
+              { name: "2019年度", data: {'呼吸器' => 3838, '脳血管' => 3852, '運動器' => 5284} },
+              { name: "2020年度", data: @reha_deasease_this_year }
+            ], suffix: "単位" %>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+    <div class="col s12 m12 l12">
+      <h5 style="display: inline-block;"><i class="material-icons gray-text">timeline</i> 今年度 PT別</h5>
+    </div>
+    
+    <div class="col s12 m12 l12">
+      <div class="card white darken-1">
+        <div class="data">
+          <div class="card-content">
+            <%= column_chart @out_patient_reha_pt_this_year, stacked: true, suffix: "単位" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col s12 m12 l12">
+      <h5 style="display: inline-block;"><i class="material-icons gray-text">timeline</i> PT別総単位数</h5>
+    </div>
+    
+    <div class="col s12 m12 l12">
+      <div class="card white darken-1">
+        <div class="data">
+          <div class="card-content">
+            <%= column_chart [
+              { name: "2018年度", data: {'リハ一郎' => 3535, 'リハ二郎' => 3434, 'リハ三郎' =>3333 } },
+              { name: "2019年度", data: {'リハ一郎' => 4343, 'リハ二郎' => 3235, 'リハ三郎' =>4453 } },
+              { name: "2020年度", data: @reha_pt_this_year }
+            ], suffix: "単位", max: 5000 %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="col s12 m12 l12">
+  <h5><i class="material-icons gray-text">timeline</i> 総収益</h5>
+</div>
+
+<div class="col s12 m12 l12">
+  <div class="card white darken-1">
+    <div class="data">
+      <div class="card-content">
+        <%= line_chart [
+          { name: "2018年度", data: {'4' => 140000, '5' => 150000, '6' => 160000, '7' => 170000, '8' => 180000, '9' => 190000, '10' => 180000, '11' => 170000, '12' => 160000, '1' => 110000, '2' => 120000, '3' => 130000} },
+          { name: "2019年度", data: @revenues_data_last_year },
+          { name: "2020年度", data: @revenues_data_this_year
+          }
+        ], min: 100000, max: 200000, suffix: "単位" %>
+      </div>
+    </div>
+  </div>
+</div>

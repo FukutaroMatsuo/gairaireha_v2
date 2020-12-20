@@ -1,0 +1,28 @@
+<% provide(:title, '日報編集') %>
+<%= form_with(model:@reha, local:true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <div class="row z-depth-1">
+    
+    <div class="input-field col s12 m3">
+      <%= f.text_field :day %>
+    </div>
+
+    <div class="input-field col s12 m3">
+      <%= f.select :user_id, [["リハ一郎", "2"], ["リハ二郎", "3"], ["リハ三郎", "4"], ["リハ四郎", "5"]], include_blank: "PT名" %>
+    </div>
+
+    <div class="input-field col s12 m3">
+      <%= f.collection_select :patient_id, Patient.all.order(id: 'DESC'), :id, :patient_name, include_blank: "患者名" %>
+    </div>
+
+    <div class="input-field col s12 m3">
+      <%= f.select :unit, [["1単位", "1"], ["2単位", "2"], ["3単位", "3"]] %>
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="input-field col s12">
+        <%= f.submit "確定", class: "btn green waves-effect waves-light right" %>
+      </div>
+  </div>
+<% end %>

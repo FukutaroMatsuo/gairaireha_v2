@@ -1,0 +1,49 @@
+<% provide(:title, '担当一覧') %>
+<div class="row">
+  
+  <div class="col s12 m12 l12">
+    <h5><i class="material-icons gray-text">timeline</i> <%= @user.name %>PTの担当患者一覧</h5>
+  </div>
+  
+  <div class="col s12 m12 l12">
+    <div class="card white darken-1">
+      <div class="card-content">
+        
+        <table class="centered">
+          <thead>
+            <tr>
+              <th style="width: 10%;">患者名</th>
+              <th style="width: 5%;">年齢</th>
+              <th style="width: 10%;">開始日</th>
+              <th style="width: 10%;">疾患別</th>
+              <th style="width: 10%;">最終日</th>
+              <th style="width: 25%;">目標</th>
+              <th style="width: 5%;">達成</th>
+              <th style="width: 25%;">中止理由</th>
+            </tr>
+          </thead>
+        </table>
+      
+        <div class="pt_patient">
+          <table class="centered">
+            <% @user.patients.each do |patient| %>
+              <tbody>
+                <tr>
+                  <td style="width: 10%;"><%= link_to patient.patient_name, edit_patient_path(patient.id) %></td>
+                  <td style="width: 5%;"><%= (Date.today.strftime('%Y%m%d').to_i - patient.birthday.strftime('%Y%m%d').to_i) / 10000 %></td>
+                  <td style="width: 10%;"><%= patient.start_day %></td>
+                  <td style="width: 10%;"><%= patient.deasease %></td>
+                  <td style="width: 10%;"><%= patient.rehas.last.day %></td>
+                  <td style="width: 25%;"><%= patient.goal %></td>
+                  <td style="width: 5%;"><%= patient.achievement %></td>
+                  <td style="width: 25%;"><%= patient.drop_out %></td>
+                </tr>
+              </tbody>
+            <% end %>
+          </table>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

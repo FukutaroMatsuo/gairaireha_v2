@@ -1,0 +1,106 @@
+@import "materialize";
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+  padding-top: 30px;
+}
+
+.table-body-reha {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+.data {
+  padding-top: 20px;
+}
+
+.table-body-patient {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+#patient_new {
+  padding: 20px;
+}
+
+.table-body-user {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.alert {
+  color: #262626;
+  background: #ffebe8;
+  text-align: center;
+  border: 2px solid #990000;
+  padding: 12px;
+  font-weight: 850;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.mod-tbl {
+  margin: 20px 0 0;
+  width: 100%;
+  max-width: 100%;
+  // max-height: 200px;
+  // overflow: auto;
+  overflow-x: scroll;
+  background: #ffffff;
+  box-shadow: 0 0 4px 4px rgba($color: #000000, $alpha: 0.2);
+  .revenue-table {
+    table-layout: fixed;
+    border: none;
+    border-collapse: collapse;
+    min-width: 100%;
+  }
+  .revenue-th,
+  .revenue-td {
+    padding: 5px;
+    border: 1px solid #546e7a;
+  }
+  .revenue-thead,
+  .revenue-th {
+    text-align: center;
+    color: #fff;
+    background: #546e7a;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    &:nth-child(1) {
+      border-left: 1px solid #546e7a;
+    }
+    &:last-child {
+      border-right: 1px solid #546e7a;
+    }
+    a {
+      color: #fff;
+    }
+  }
+  .revenue-tbody,
+  .revenue-th {
+    width: 200px;
+    min-width: 200px;
+  }
+  .y-fixed {
+    position: sticky;
+    left: 0;
+  }
+  .revenue-td {
+    width: 130px;
+    min-width: 130px;
+    text-align: center;
+  }
+}
+
+.year-revenue {
+  overflow: scroll;
+}

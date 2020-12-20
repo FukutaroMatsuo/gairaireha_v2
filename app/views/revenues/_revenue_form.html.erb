@@ -1,0 +1,16 @@
+<%= form_with(model:@revenue, local:true) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <div class="input-field">
+    <%= f.text_field :working_month, placeholder: "稼働月を入力して下さい 例)2020/4" %>
+    <%= f.label :working_month, "稼働月", class: "active" %>
+  </div>
+
+  <div class="input-field">
+    <%= f.text_field :score, placeholder: "収益を入力して下さい 例)123456" %>
+    <%= f.label :score, "収益", class: "active" %>
+  </div>
+
+  <div class="input-field">
+    <%= f.submit "確定", class: "btn green waves-effect waves-light right" %>
+  </div>
+<% end %>

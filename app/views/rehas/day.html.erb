@@ -1,0 +1,12 @@
+<% provide(:title, '日報一覧') %>
+<div class="row">
+  <div class="col s12 m3 l3">
+    <ul>
+      <li>
+        <% @get_day.each do |day| %>
+          <p><%= link_to day.day, list_path(day.day) %></p>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
