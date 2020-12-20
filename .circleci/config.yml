@@ -1,0 +1,27 @@
+version: 2.1
+jobs:
+  test:
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
+      - run:
+          name: docker-compose up --build -d
+          command: docker-compose up --build -d
+      - run:
+          name: sleep for waiting launch db
+          command: sleep 30
+      - run:
+          name: rails db:create & db:migrate
+          command: docker-compose run web rails db:create db:migrate
+      - run:
+          name: rspec
+          command: docker-compose run web bundle exec rspec
+      - run:
+          name: docker-compose down
+          command: docker-compose down
+
+workflows:
+  test_and_deploy:
+    jobs:
+      - test
