@@ -12,3 +12,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
 WORKDIR /app
 COPY Gemfile Gemfile.lock /app/
 RUN bundle install
+
+COPY . .
+EXPOSE 3000
+CMD [ "rails", "s", "-b", "0.0.0.0" ]
