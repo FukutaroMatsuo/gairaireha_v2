@@ -1,0 +1,31 @@
+version: "3"
+
+volumes:
+  sockets:
+
+services:
+  app:
+    image: 565720812058.dkr.ecr.ap-northeast-1.amazonaws.com/rehakanri-app
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile.prod
+    ports:
+      - "3000:3000"
+    volumes:
+      - sockets:/app/tmp/sockets
+    environment:
+      - "DB_PASSWORD=postgres"
+    tty: true
+    stdin_open: true
+
+  web:
+    image: 565720812058.dkr.ecr.ap-northeast-1.amazonaws.com/rehakanri-web
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - sockets:/app/tmp/sockets
+    depends_on:
+      - app

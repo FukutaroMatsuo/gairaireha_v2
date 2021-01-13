@@ -2,28 +2,26 @@ version: "3"
 
 volumes:
   db-data:
+  sockets:
 
 services:
-  web:
-    build: .
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
     ports:
       - "3000:3000"
     volumes:
       - .:/app
+      - sockets:/app/tmp/sockets
     environment:
-      - "DATABASE_PASSWORD=postgres"
-      - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
+      - "DB_PASSWORD=postgres"
     tty: true
     stdin_open: true
     depends_on:
       - db
     links:
       - db
-
-  selenium_chrome:
-    image: selenium/standalone-chrome-debug
-    logging:
-      driver: none
 
   db:
     image: postgres
@@ -32,3 +30,14 @@ services:
     environment:
       - "POSTGRES_USER=postgres"
       - "POSTGRES_PASSWORD=postgres"
+
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - sockets:/app/tmp/sockets
+    depends_on:
+      - app
