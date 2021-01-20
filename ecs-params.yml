@@ -4,4 +4,4 @@ task_definition:
     app:
       mem_limit: 536870912
     web:
-      mem_limit: 536870912
+      mem_limit: 268435456
